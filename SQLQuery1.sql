@@ -85,3 +85,7 @@ SELECT * FROM BookInfoView
 WHERE AuthorFullName LIKE CONCAT('%',@query,'%') OR Name LIKE CONCAT('%',@query,'%')
 
 -- TASK 6
+
+CREATE VIEW AuthorInfoView
+AS
+SELECT a.Id, CONCAT(a.Name, ' ', a.Surname) FullName, (SELECT COUNT(*) FROM Books b WHERE a.Id=b.AuthorId) BooksCount,(SELECT MAX(PageCount) FROM Books b WHERE a.Id=b.AuthorId) MaxPageCount FROM Authors a
